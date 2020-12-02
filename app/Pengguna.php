@@ -80,6 +80,6 @@ class Pengguna extends Authenticatable implements JWTSubject
     /**
      * @var array
      */
-    protected $fillable = ['id_user', 'email', 'password', 'nama', 'create_data', 'last_update', 'soft_delete', 'id_peran', 'id_pegawai'];
+    protected $fillable = ['id_user', 'email', 'password', 'nama', 'id_peran', 'id_pegawai', 'create_data', 'last_update', 'soft_delete'];
 
 }

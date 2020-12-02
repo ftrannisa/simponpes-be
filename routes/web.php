@@ -16,5 +16,12 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
-
-Route::get("/login","LoginController@login");
+// Route::middleware('web')->group(function(){
+//     Route::get("/login","LoginController@login");
+// });
+Route::middleware('web')->group(function(){
+    Route::get('login', 'LoginController@_login');
+    Route::post('login', 'LoginController@_login');
+    Route::get('ptk/getValidBkn', 'PtkController@getValidasiBkn');
+   
+   });

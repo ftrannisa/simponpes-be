@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <system.web>
+        <customErrors mode="Off" />
+        <compilation debug="true" />
+    </system.web>
+    <system.webServer>
+        <httpErrors errorMode="Detailed" />
+        <asp scriptErrorSentToBrowser="true" />
+        <defaultDocument>
+            <files>
+                <clear />
+                <add value="index.php" />
+                <add value="Default.htm" />
+                <add value="Default.asp" />
+                <add value="index.htm" />
+                <add value="index.html" />
+                <add value="iisstart.htm" />
+            </files>
+        </defaultDocument>
+        <rewrite>
+            <rules>
+                <rule name="Imported Rule 1" stopProcessing="true">
+                    <match url="^(.*)$" ignoreCase="false" />
+                    <conditions logicalGrouping="MatchAll">
+                        <add input="{R:1}" pattern="^(index\.php|images|resources|robots\.txt)" ignoreCase="false" negate="true" />
+                        <add input="{REQUEST_FILENAME}" matchType="IsFile" ignoreCase="false" negate="true" />
+                        <add input="{REQUEST_FILENAME}" matchType="IsDirectory" ignoreCase="false" negate="true" />
+                    </conditions>
+                    <action type="Rewrite" url="index.php?/{R:1}" appendQueryString="true" />
+                </rule>
+                <rule name="Imported Rule 2" stopProcessing="true">
+                    <match url="^(.*)/$" ignoreCase="false" />
+                    <conditions logicalGrouping="MatchAll">
+                        <add input="{REQUEST_FILENAME}" matchType="IsDirectory" ignoreCase="false" negate="true" />
+                    </conditions>
+                    <action type="Redirect" url="/{R:1}" redirectType="Permanent" />
+                </rule>
+                <rule name="Imported Rule 3" stopProcessing="true">
+                    <match url="^" ignoreCase="false" />
+                    <conditions logicalGrouping="MatchAll">
+                        <add input="{REQUEST_FILENAME}" matchType="IsDirectory" ignoreCase="false" negate="true" />
+                        <add input="{REQUEST_FILENAME}" matchType="IsFile" ignoreCase="false" negate="true" />
+                    </conditions>
+                    <action type="Rewrite" url="index.php" />
+                </rule>
+            </rules>
+        </rewrite>
+        <httpProtocol>
+            <customHeaders>
+                <add name="Access-Control-Allow-Methods" value="GET,PUT,POST,DELETE,OPTIONS" />
+                <add name="Access-Control-Allow-Headers" value="Origin, Authorization, X-Requested-With, Content-Type, Accept" />
+                <add name="Access-Control-Allow-Origin" value="*" />
+            </customHeaders>
+        </httpProtocol>
+    </system.webServer>
+</configuration>
