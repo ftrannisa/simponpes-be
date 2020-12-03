@@ -15,6 +15,18 @@ use Illuminate\Support\Facades\Route;
 */
 Route::get('login', 'LoginController@_login');
 Route::post('login', 'LoginController@_login');
+Route::middleware('token')->group(function(){
+	Route::prefix('auth')->group(function () {
+		Route::get('token', 'LoginController@_cekToken');
+		Route::post('register', function(){
+			return Response('OK', 200);
+		});
+		Route::post('user/update', function(){
+			return Response('OK', 200);
+		});
+
+	});
+});
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
