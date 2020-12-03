@@ -77,7 +77,7 @@ class LoginController extends Controller
         }
     }
 
-    public function CekToken(Request $request)
+    public function _cekToken(Request $request)
     {
         // $token = $request->header('Authorization');
         $user  = JWTAuth::parseToken()->authenticate();
