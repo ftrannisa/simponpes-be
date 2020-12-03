@@ -29,7 +29,7 @@ class LoginController extends Controller
     //     return $password_encrypt = $encrypt->doEncrypt();
     // }
 
-    public function Login(Request $request, $password='', $email='')
+    public function _login(Request $request, $password='', $email='')
     {
         $email = $email ? $email : $request->email;
         $password = $password ? $password : $request->password;
