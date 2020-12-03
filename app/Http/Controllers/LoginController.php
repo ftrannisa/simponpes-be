@@ -252,7 +252,8 @@ class LoginController extends Controller
 
         $data['user'] = array(
             'from' => 'sim-musda-backend',
-            'role' => $params['peran_nama'],
+            'role' => 'admin',
+            // 'role' => $params['peran_nama'],
             'rows' => $params['peran_nama'] == "Administrator" ? @$params['rows'] : $params['rows'],
             'menu' => $params['menu2'],
             'data' => array(
