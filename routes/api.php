@@ -31,3 +31,12 @@ Route::middleware('token')->group(function(){
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+
+Route::resource('santris', 'API\SantriAPIController');
+
+Route::resource('pegawais', 'API\PegawaiAPIController');
+
+Route::resource('unit_usahas', 'API\UnitUsahaAPIController');
+
+Route::resource('ekstrakulikulers', 'API\EkstrakulikulerAPIController');
