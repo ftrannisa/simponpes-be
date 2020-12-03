@@ -54,7 +54,7 @@ class Pengguna extends Authenticatable implements JWTSubject
      * 
      * @var string
      */
-    protected $table = 'pengguna';
+    public $table = 'pengguna';
 
     /**
      * The primary key for the model.
