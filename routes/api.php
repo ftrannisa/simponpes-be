@@ -40,3 +40,5 @@ Route::resource('pegawais', 'API\PegawaiAPIController');
 Route::resource('unit_usahas', 'API\UnitUsahaAPIController');
 
 Route::resource('ekstrakulikulers', 'API\EkstrakulikulerAPIController');
+
+Route::resource('users', 'API\UserAPIController');
