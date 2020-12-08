@@ -27,13 +27,14 @@ class Santri extends Model
 
     public $table = 'santri';
     
-    const CREATED_AT = 'created_at';
-    const UPDATED_AT = 'updated_at';
+    const CREATED_AT = 'create_date';
+    const UPDATED_AT = 'last_update';
 
     protected $primaryKey = 'id_santri';
     protected $appends = ['id'];
 
     public $fillable = [
+        'id_santri',
         'nis',
         'nama_lengkap',
         'nama_panggilan',
@@ -54,7 +55,7 @@ class Santri extends Model
      * @var array
      */
     protected $casts = [
-        'id_santri' => 'string',
+        'id_santri' => 'uuid',
         'nis' => 'string',
         'nama_lengkap' => 'string',
         'nama_panggilan' => 'string',
@@ -94,5 +95,8 @@ class Santri extends Model
         return $this->attributes['id_santri'];
     }
 
-    
+    public function setIdSantriAttribute()
+    {
+        return $this->attributes['id_santri']=Str::uuid();
+    }    
 }

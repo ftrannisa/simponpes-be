@@ -41,6 +41,7 @@ class SantriAPIController extends AppBaseController
         );
 
         return $this->sendResponse($santris->toArray(), 'Santris retrieved successfully');
+        
     }
 
     /**
