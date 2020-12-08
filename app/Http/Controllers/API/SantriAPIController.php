@@ -9,7 +9,7 @@ use App\Repositories\SantriRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
 use Response;
-
+use Illuminate\Support\Str;
 /**
  * Class SantriController
  * @package App\Http\Controllers\API
@@ -55,7 +55,9 @@ class SantriAPIController extends AppBaseController
     public function store(CreateSantriAPIRequest $request)
     {
         $input = $request->all();
-
+        // var_dump($input);
+        // die;
+        $input['id_santri']=Str::uuid();
         $santri = $this->santriRepository->create($input);
 
         return $this->sendResponse($santri->toArray(), 'Santri saved successfully');

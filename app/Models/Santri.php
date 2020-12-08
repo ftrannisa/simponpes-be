@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model as Model;
+use Illuminate\Support\Str;
 
 /**
  * Class Santri
@@ -95,8 +96,8 @@ class Santri extends Model
         return $this->attributes['id_santri'];
     }
 
-    public function setIdSantriAttribute()
-    {
-        return $this->attributes['id_santri']=Str::uuid();
-    }    
+//     public function setIdSantriAttribute()
+//     {
+//         return $this->attributes['id_santri']=Str::uuid();
+//     }    
 }
