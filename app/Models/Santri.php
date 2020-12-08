@@ -31,7 +31,7 @@ class Santri extends Model
     const UPDATED_AT = 'updated_at';
 
     protected $primaryKey = 'id_santri';
-
+    protected $appends = ['id'];
 
     public $fillable = [
         'nis',
@@ -88,6 +88,11 @@ class Santri extends Model
         'last_update' => 'nullable',
         'soft_delete' => 'nullable'
     ];
+    
+    public function getIdAttribute()
+    {
+        return $this->attributes['id_santri'];
+    }
 
     
 }
