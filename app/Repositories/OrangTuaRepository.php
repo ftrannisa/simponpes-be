@@ -2,34 +2,37 @@
 
 namespace App\Repositories;
 
-use App\Models\Pegawai;
+use App\Models\OrangTua;
 use App\Repositories\BaseRepository;
 
 /**
- * Class PegawaiRepository
+ * Class OrangTuaRepository
  * @package App\Repositories
- * @version December 3, 2020, 9:29 am UTC
+ * @version December 16, 2020, 7:46 am UTC
 */
 
-class PegawaiRepository extends BaseRepository
+class OrangTuaRepository extends BaseRepository
 {
     /**
      * @var array
      */
     protected $fieldSearchable = [
-        'id_pegawai',
-        'nama_pegawai',
-        'nama_panggilan',
-        'nik',
-        'id_bidang',
-        'no_hp',
-        'jenis_kelamin',
-        'alamat',
-        'id_peran',
-        'tanggal_masuk',
+        'nama_ayah',
+        'alamat_ayah',
+        'pekerjaan_ayah',
+        'hp_ayah',
+        'nama_ibu',
+        'alamat_ibu',
+        'pekerjaan_ibu',
+        'hp_ibu',
+        'nama_wali',
+        'alamat_wali',
+        'pekerjaan_wali',
+        'hp_wali',
         'create_date',
         'last_update',
-        'soft_delete'
+        'soft_delete',
+        'nik'
     ];
 
     /**
@@ -47,6 +50,6 @@ class PegawaiRepository extends BaseRepository
      **/
     public function model()
     {
-        return Pegawai::class;
+        return OrangTua::class;
     }
 }

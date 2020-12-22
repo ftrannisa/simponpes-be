@@ -48,7 +48,8 @@ class Santri extends Model
         'foto',
         'create_date',
         'last_update',
-        'soft_delete'
+        'soft_delete',
+        'id_orangtua'
     ];
 
     /**
@@ -70,7 +71,8 @@ class Santri extends Model
         'foto' => 'string',
         'create_date' => 'datetime',
         'last_update' => 'datetime',
-        'soft_delete' => 'integer'
+        'soft_delete' => 'integer',
+        'id_orangtua' => 'uuid'
     ];
 
     /**

@@ -42,3 +42,5 @@ Route::resource('unit_usahas', 'API\UnitUsahaAPIController');
 Route::resource('ekstrakulikulers', 'API\EkstrakulikulerAPIController');
 
 Route::resource('users', 'API\UserAPIController');
+
+Route::resource('orang_tuas', 'API\OrangTuaAPIController');
