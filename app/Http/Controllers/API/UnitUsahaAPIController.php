@@ -9,6 +9,7 @@ use App\Repositories\UnitUsahaRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
 use Response;
+use Illuminate\Support\Str;
 
 /**
  * Class UnitUsahaController
@@ -54,7 +55,9 @@ class UnitUsahaAPIController extends AppBaseController
     public function store(CreateUnitUsahaAPIRequest $request)
     {
         $input = $request->all();
-
+        $input['id_toko']=Str::uuid();
+        // $input['id_bidang']=Str::uuid();
+        // $input['id_peran']=Str::uuid();
         $unitUsaha = $this->unitUsahaRepository->create($input);
 
         return $this->sendResponse($unitUsaha->toArray(), 'Unit Usaha saved successfully');

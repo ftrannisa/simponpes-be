@@ -31,10 +31,11 @@ class OrangTua extends Model
 
     public $table = 'orangtua';
     
-    const CREATED_AT = 'create_date';
+    const CREATED_AT = 'created_date';
     const UPDATED_AT = 'last_update';
 
     protected $primaryKey = 'id_orangtua';
+    protected $appends = ['id'];
 
 
     public $fillable = [

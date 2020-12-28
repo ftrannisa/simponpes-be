@@ -9,7 +9,7 @@ use App\Repositories\PegawaiRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
 use Response;
-
+use Illuminate\Support\Str;
 /**
  * Class PegawaiController
  * @package App\Http\Controllers\API
@@ -54,7 +54,7 @@ class PegawaiAPIController extends AppBaseController
     public function store(CreatePegawaiAPIRequest $request)
     {
         $input = $request->all();
-
+        $input['id_pegawai']=Str::uuid();
         $pegawai = $this->pegawaiRepository->create($input);
 
         return $this->sendResponse($pegawai->toArray(), 'Pegawai saved successfully');

@@ -9,6 +9,7 @@ use App\Repositories\EkstrakulikulerRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
 use Response;
+use Illuminate\Support\Str;
 
 /**
  * Class EkstrakulikulerController
@@ -54,7 +55,7 @@ class EkstrakulikulerAPIController extends AppBaseController
     public function store(CreateEkstrakulikulerAPIRequest $request)
     {
         $input = $request->all();
-
+        $input['id_ekskul']=Str::uuid();
         $ekstrakulikuler = $this->ekstrakulikulerRepository->create($input);
 
         return $this->sendResponse($ekstrakulikuler->toArray(), 'Ekstrakulikuler saved successfully');

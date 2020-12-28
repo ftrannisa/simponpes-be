@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model as Model;
+use Illuminate\Support\Str;
 
 /**
  * Class Ekstrakulikuler
@@ -23,10 +24,11 @@ class Ekstrakulikuler extends Model
 
     public $table = 'ekskul';
     
-    const CREATED_AT = 'created_at';
-    const UPDATED_AT = 'updated_at';
+    const CREATED_AT = 'create_date';
+    const UPDATED_AT = 'last_update';
 
     protected $primaryKey = 'id_ekskul';
+    protected $appends = ['id'];
 
     public $fillable = [
         'id_ekskul',
@@ -45,7 +47,7 @@ class Ekstrakulikuler extends Model
      * @var array
      */
     protected $casts = [
-        'id_ekskul' => 'string',
+        'id_ekskul' => 'uuid',
         'nama_ekskul' => 'string',
         'nama_pelatih' => 'string',
         'no_hp_pelatih' => 'string',
@@ -61,7 +63,6 @@ class Ekstrakulikuler extends Model
      * @var array
      */
     public static $rules = [
-        'id_ekskul' => 'nullable|string',
         'nama_ekskul' => 'nullable|string|max:255',
         'nama_pelatih' => 'nullable|string|max:255',
         'no_hp_pelatih' => 'nullable|string|max:16',
@@ -71,5 +72,9 @@ class Ekstrakulikuler extends Model
         'soft_delete' => 'nullable'
     ];
 
+    public function getIdAttribute()
+    {
+        return $this->attributes['id_ekskul'];
+    }
     
 }

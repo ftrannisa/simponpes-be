@@ -23,10 +23,11 @@ class UnitUsaha extends Model
 
     public $table = 'toko';
     
-    const CREATED_AT = 'created_at';
-    const UPDATED_AT = 'updated_at';
+    const CREATED_AT = 'create_date';
+    const UPDATED_AT = 'last_update';
 
     protected $primaryKey = 'id_toko';
+    protected $appends = ['id'];
 
     public $fillable = [
         'id_toko',
@@ -71,5 +72,8 @@ class UnitUsaha extends Model
         'soft_delete' => 'nullable'
     ];
 
-    
+    public function getIdAttribute()
+    {
+        return $this->attributes['id_toko'];
+    }
 }

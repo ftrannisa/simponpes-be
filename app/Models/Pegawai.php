@@ -28,11 +28,11 @@ class Pegawai extends Model
 
     public $table = 'pegawai';
     
-    const CREATED_AT = 'created_at';
-    const UPDATED_AT = 'updated_at';
+    const CREATED_AT = 'create_date';
+    const UPDATED_AT = 'last_update';
 
     protected $primaryKey = 'id_pegawai';
-
+    protected $appends = ['id'];
 
     public $fillable = [
         'id_pegawai',
@@ -92,5 +92,8 @@ class Pegawai extends Model
         'soft_delete' => 'nullable'
     ];
 
-    
+    public function getIdAttribute()
+    {
+        return $this->attributes['id_pegawai'];
+    }
 }
