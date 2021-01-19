@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
 use Response;
 use Illuminate\Support\Str;
+use DB;
 
 /**
  * Class UnitUsahaController
@@ -35,13 +36,20 @@ class UnitUsahaAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $unitUsahas = $this->unitUsahaRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
-        );
+        // $unitUsahas = $this->unitUsahaRepository->all(
+        //     $request->except(['skip', 'limit']),
+        //     $request->get('skip'),
+        //     $request->get('limit')
+        // );
 
-        return $this->sendResponse($unitUsahas->toArray(), 'Unit Usahas retrieved successfully');
+        // return $this->sendResponse($unitUsahas->toArray(), 'Unit Usahas retrieved successfully');
+        $unitUsahas = DB::table('toko')
+        ->select('toko.id_toko as id', 'toko.*', 'jenis_toko.nama_jenis_toko as nama_jenis_toko')
+        ->where('toko.soft_delete', 0)
+        ->leftJoin('ref.jenis_toko as jenis_toko', 'toko.jenis_toko_id', '=', 'jenis_toko.jenis_toko_id')
+        ->get();
+
+        return $this->sendResponse($unitUsahas->toArray(), 'unitUsahas retrieved successfully');
     }
 
     /**
@@ -56,6 +64,7 @@ class UnitUsahaAPIController extends AppBaseController
     {
         $input = $request->all();
         $input['id_toko']=Str::uuid();
+        $input['soft_delete']=0;
         // $input['id_bidang']=Str::uuid();
         // $input['id_peran']=Str::uuid();
         $unitUsaha = $this->unitUsahaRepository->create($input);
@@ -130,5 +139,13 @@ class UnitUsahaAPIController extends AppBaseController
         $unitUsaha->delete();
 
         return $this->sendSuccess('Unit Usaha deleted successfully');
+    }
+
+    public function getRefJenisToko()
+    {
+        $jenis_toko = DB::table('ref.jenis_toko')
+        ->get();
+
+        return $jenis_toko;
     }
 }

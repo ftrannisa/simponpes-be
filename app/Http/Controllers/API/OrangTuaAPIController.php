@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
 use Response;
 use Illuminate\Support\Str;
+use DB;
 
 /**
  * Class OrangTuaController
@@ -35,13 +36,19 @@ class OrangTuaAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $orangTuas = $this->orangTuaRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
-        );
+        // $orangTuas = $this->orangTuaRepository->all(
+        //     $request->except(['skip', 'limit']),
+        //     $request->get('skip'),
+        //     $request->get('limit')
+        // );
 
-        return $this->sendResponse($orangTuas->toArray(), 'Orang Tuas retrieved successfully');
+        // return $this->sendResponse($orangTuas->toArray(), 'Orang Tuas retrieved successfully');
+        $orangTuas = DB::table('orangtua')
+        ->select('orangtua.id_orangtua as id', 'orangtua.*')
+        ->where('soft_delete', 0)
+        ->get();
+
+        return $this->sendResponse($orangTuas->toArray(), 'orangtua retrieved successfully');
     }
 
     /**
@@ -56,6 +63,7 @@ class OrangTuaAPIController extends AppBaseController
     {
         $input = $request->all();
         $input['id_orangtua']=Str::uuid();
+        $input['soft_delete']=0;
         $orangTua = $this->orangTuaRepository->create($input);
 
         return $this->sendResponse($orangTua->toArray(), 'Orang Tua saved successfully');

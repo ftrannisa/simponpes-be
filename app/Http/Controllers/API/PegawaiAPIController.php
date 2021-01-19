@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
 use Response;
 use Illuminate\Support\Str;
+use DB;
 /**
  * Class PegawaiController
  * @package App\Http\Controllers\API
@@ -34,11 +35,19 @@ class PegawaiAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $pegawais = $this->pegawaiRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
-        );
+        // $pegawais = $this->pegawaiRepository->all(
+        //     $request->except(['skip', 'limit']),
+        //     $request->get('skip'),
+        //     $request->get('limit')
+        // );
+
+        // return $this->sendResponse($pegawais->toArray(), 'Pegawais retrieved successfully');
+        $pegawais = DB::table('pegawai')
+            ->select('pegawai.id_pegawai as id', 'pegawai.*', 'bidang.nama_bidang as nama_bidang', 'peran.nama_peran as nama_peran')
+            ->where('pegawai.soft_delete', 0)
+            ->leftJoin('ref.bidang as bidang', 'pegawai.id_bidang', '=', 'bidang.id_bidang')
+            ->leftJoin('ref.peran as peran', 'pegawai.id_peran', '=', 'peran.id_peran')
+            ->get();
 
         return $this->sendResponse($pegawais->toArray(), 'Pegawais retrieved successfully');
     }
@@ -55,6 +64,7 @@ class PegawaiAPIController extends AppBaseController
     {
         $input = $request->all();
         $input['id_pegawai']=Str::uuid();
+        $input['soft_delete']=0;
         $pegawai = $this->pegawaiRepository->create($input);
 
         return $this->sendResponse($pegawai->toArray(), 'Pegawai saved successfully');
@@ -127,5 +137,21 @@ class PegawaiAPIController extends AppBaseController
         $pegawai->delete();
 
         return $this->sendSuccess('Pegawai deleted successfully');
+    }
+
+    public function getRefBidang()
+    {
+        $bidang = DB::table('ref.bidang')
+        ->get();
+
+        return $bidang;
+    }
+
+    public function getRefPeran()
+    {
+        $peran = DB::table('ref.peran')
+        ->get();
+
+        return $peran;
     }
 }
