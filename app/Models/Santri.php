@@ -42,12 +42,14 @@ class Santri extends Model
         'TTL',
         'jenis_kelamin',
         'alamat',
+        'tanggal_lahir',
         'tanggal_masuk',
         'asal',
         'foto',
         'create_date',
         'last_update',
-        'soft_delete'
+        'soft_delete',
+        'id_orangtua'
     ];
 
     /**
@@ -63,12 +65,14 @@ class Santri extends Model
         'TTL' => 'string',
         'jenis_kelamin' => 'string',
         'alamat' => 'string',
+        'tanggal_lahir' => 'string',
         'tanggal_masuk' => 'string',
         'asal' => 'string',
         'foto' => 'string',
         'create_date' => 'datetime',
         'last_update' => 'datetime',
-        'soft_delete' => 'integer'
+        'soft_delete' => 'integer',
+        'id_orangtua' => 'uuid'
     ];
 
     /**
@@ -83,6 +87,7 @@ class Santri extends Model
         'TTL' => 'nullable|string|max:10',
         'jenis_kelamin' => 'nullable|string|max:10',
         'alamat' => 'nullable|string',
+        'tanggal_lahir' => 'nullable|string|max:255',
         'tanggal_masuk' => 'nullable|string|max:255',
         'asal' => 'nullable|string|max:20',
         'foto' => 'nullable|string|max:255',

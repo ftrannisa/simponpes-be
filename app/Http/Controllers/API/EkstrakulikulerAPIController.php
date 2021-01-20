@@ -9,6 +9,8 @@ use App\Repositories\EkstrakulikulerRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
 use Response;
+use Illuminate\Support\Str;
+use DB;
 
 /**
  * Class EkstrakulikulerController
@@ -34,13 +36,19 @@ class EkstrakulikulerAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $ekstrakulikulers = $this->ekstrakulikulerRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
-        );
+        // $ekstrakulikulers = $this->ekstrakulikulerRepository->all(
+        //     $request->except(['skip', 'limit']),
+        //     $request->get('skip'),
+        //     $request->get('limit')
+        // );
 
-        return $this->sendResponse($ekstrakulikulers->toArray(), 'Ekstrakulikulers retrieved successfully');
+        // return $this->sendResponse($ekstrakulikulers->toArray(), 'Ekstrakulikulers retrieved successfully');
+        $ekstrakulikulers = DB::table('ekskul')
+        ->select('ekskul.id_ekskul as id', 'ekskul.*')
+        ->where('soft_delete', 0)
+        ->get();
+
+        return $this->sendResponse($ekstrakulikulers->toArray(), 'Ekskul retrieved successfully');
     }
 
     /**
@@ -54,7 +62,8 @@ class EkstrakulikulerAPIController extends AppBaseController
     public function store(CreateEkstrakulikulerAPIRequest $request)
     {
         $input = $request->all();
-
+        $input['id_ekskul']=Str::uuid();
+        $input['soft_delete']=0;
         $ekstrakulikuler = $this->ekstrakulikulerRepository->create($input);
 
         return $this->sendResponse($ekstrakulikuler->toArray(), 'Ekstrakulikuler saved successfully');

@@ -1,6 +1,6 @@
 [
     {
-        "name": "id_santri",
+        "name": "id_orangtua",
         "dbType": "string",
         "htmlType": "text",
         "validations": null,
@@ -12,19 +12,7 @@
         "inView": false
     },
     {
-        "name": "nis",
-        "dbType": "string,50:nullable",
-        "htmlType": "text",
-        "validations": "nullable|string|max:50|nullable|string|max:50",
-        "searchable": true,
-        "fillable": true,
-        "primary": false,
-        "inForm": true,
-        "inIndex": true,
-        "inView": true
-    },
-    {
-        "name": "nama_lengkap",
+        "name": "nama_ayah",
         "dbType": "string,255:nullable",
         "htmlType": "text",
         "validations": "nullable|string|max:255|nullable|string|max:255",
@@ -36,55 +24,7 @@
         "inView": true
     },
     {
-        "name": "nama_panggilan",
-        "dbType": "string,20:nullable",
-        "htmlType": "text",
-        "validations": "nullable|string|max:20|nullable|string|max:20",
-        "searchable": true,
-        "fillable": true,
-        "primary": false,
-        "inForm": true,
-        "inIndex": true,
-        "inView": true
-    },
-    {
-        "name": "TTL",
-        "dbType": "string,10:nullable",
-        "htmlType": "text",
-        "validations": "nullable|string|max:10|nullable|string|max:10",
-        "searchable": true,
-        "fillable": true,
-        "primary": false,
-        "inForm": true,
-        "inIndex": true,
-        "inView": true
-    },
-    {
-        "name": "jenis_kelamin",
-        "dbType": "string,10:nullable",
-        "htmlType": "text",
-        "validations": "nullable|string|max:10|nullable|string|max:10",
-        "searchable": true,
-        "fillable": true,
-        "primary": false,
-        "inForm": true,
-        "inIndex": true,
-        "inView": true
-    },
-    {
-        "name": "alamat",
-        "dbType": "text:nullable",
-        "htmlType": "textarea",
-        "validations": "nullable|string|nullable|string",
-        "searchable": true,
-        "fillable": true,
-        "primary": false,
-        "inForm": true,
-        "inIndex": true,
-        "inView": true
-    },
-    {
-        "name": "tanggal_masuk",
+        "name": "alamat_ayah",
         "dbType": "string,255:nullable",
         "htmlType": "text",
         "validations": "nullable|string|max:255|nullable|string|max:255",
@@ -96,10 +36,10 @@
         "inView": true
     },
     {
-        "name": "asal",
-        "dbType": "string,20:nullable",
+        "name": "pekerjaan_ayah",
+        "dbType": "string,255:nullable",
         "htmlType": "text",
-        "validations": "nullable|string|max:20|nullable|string|max:20",
+        "validations": "nullable|string|max:255|nullable|string|max:255",
         "searchable": true,
         "fillable": true,
         "primary": false,
@@ -108,7 +48,103 @@
         "inView": true
     },
     {
-        "name": "foto",
+        "name": "hp_ayah",
+        "dbType": "string,255:nullable",
+        "htmlType": "text",
+        "validations": "nullable|string|max:255|nullable|string|max:255",
+        "searchable": true,
+        "fillable": true,
+        "primary": false,
+        "inForm": true,
+        "inIndex": true,
+        "inView": true
+    },
+    {
+        "name": "nama_ibu",
+        "dbType": "string,255:nullable",
+        "htmlType": "text",
+        "validations": "nullable|string|max:255|nullable|string|max:255",
+        "searchable": true,
+        "fillable": true,
+        "primary": false,
+        "inForm": true,
+        "inIndex": true,
+        "inView": true
+    },
+    {
+        "name": "alamat_ibu",
+        "dbType": "string,255:nullable",
+        "htmlType": "text",
+        "validations": "nullable|string|max:255|nullable|string|max:255",
+        "searchable": true,
+        "fillable": true,
+        "primary": false,
+        "inForm": true,
+        "inIndex": true,
+        "inView": true
+    },
+    {
+        "name": "pekerjaan_ibu",
+        "dbType": "string,255:nullable",
+        "htmlType": "text",
+        "validations": "nullable|string|max:255|nullable|string|max:255",
+        "searchable": true,
+        "fillable": true,
+        "primary": false,
+        "inForm": true,
+        "inIndex": true,
+        "inView": true
+    },
+    {
+        "name": "hp_ibu",
+        "dbType": "string,255:nullable",
+        "htmlType": "text",
+        "validations": "nullable|string|max:255|nullable|string|max:255",
+        "searchable": true,
+        "fillable": true,
+        "primary": false,
+        "inForm": true,
+        "inIndex": true,
+        "inView": true
+    },
+    {
+        "name": "nama_wali",
+        "dbType": "string,255:nullable",
+        "htmlType": "text",
+        "validations": "nullable|string|max:255|nullable|string|max:255",
+        "searchable": true,
+        "fillable": true,
+        "primary": false,
+        "inForm": true,
+        "inIndex": true,
+        "inView": true
+    },
+    {
+        "name": "alamat_wali",
+        "dbType": "string,255:nullable",
+        "htmlType": "text",
+        "validations": "nullable|string|max:255|nullable|string|max:255",
+        "searchable": true,
+        "fillable": true,
+        "primary": false,
+        "inForm": true,
+        "inIndex": true,
+        "inView": true
+    },
+    {
+        "name": "pekerjaan_wali",
+        "dbType": "string,255:nullable",
+        "htmlType": "text",
+        "validations": "nullable|string|max:255|nullable|string|max:255",
+        "searchable": true,
+        "fillable": true,
+        "primary": false,
+        "inForm": true,
+        "inIndex": true,
+        "inView": true
+    },
+    {
+        "name": "hp_wali",
         "dbType": "string,255:nullable",
         "htmlType": "text",
         "validations": "nullable|string|max:255|nullable|string|max:255",
@@ -154,5 +190,9 @@
         "inForm": true,
         "inIndex": true,
         "inView": true
+    },
+    {
+        "type": "relation",
+        "relation": "1tm,Santri,id_orangtua"
     }
 ]

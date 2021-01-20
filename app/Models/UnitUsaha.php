@@ -23,10 +23,11 @@ class UnitUsaha extends Model
 
     public $table = 'toko';
     
-    const CREATED_AT = 'created_at';
-    const UPDATED_AT = 'updated_at';
+    const CREATED_AT = 'create_date';
+    const UPDATED_AT = 'last_update';
 
     protected $primaryKey = 'id_toko';
+    protected $appends = ['id'];
 
     public $fillable = [
         'id_toko',
@@ -49,7 +50,7 @@ class UnitUsaha extends Model
         'id_user' => 'integer',
         'nama_toko' => 'string',
         'nama_pemilik' => 'string',
-        'jenis_toko_id' => 'integer',
+        'jenis_toko_id' => 'string',
         'create_date' => 'datetime',
         'last_update' => 'datetime',
         'soft_delete' => 'integer'
@@ -65,11 +66,14 @@ class UnitUsaha extends Model
         'id_user' => 'nullable|integer',
         'nama_toko' => 'nullable|string|max:255',
         'nama_pemilik' => 'nullable|string|max:255',
-        'jenis_toko_id' => 'nullable|integer',
+        'jenis_toko_id' => 'nullable|string',
         'create_date' => 'nullable',
         'last_update' => 'nullable',
         'soft_delete' => 'nullable'
     ];
 
-    
+    public function getIdAttribute()
+    {
+        return $this->attributes['id_toko'];
+    }
 }

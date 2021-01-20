@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
 use Response;
 use Illuminate\Support\Str;
+use DB;
 /**
  * Class SantriController
  * @package App\Http\Controllers\API
@@ -34,14 +35,19 @@ class SantriAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $santris = $this->santriRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
-        );
+        // $santris = $this->santriRepository->all(
+        //     $request->except(['skip', 'limit']),
+        //     $request->get('skip'),
+        //     $request->get('limit')
+        // );
 
-        return $this->sendResponse($santris->toArray(), 'Santris retrieved successfully');
-        
+        // return $this->sendResponse($santris->toArray(), 'Santris retrieved successfully');
+        $santris = DB::table('santri')
+            ->select('santri.id_santri as id', 'santri.*')
+            ->where('soft_delete', 0)
+            ->get();
+
+        return $this->sendResponse($santris->toArray(), 'Santri retrieved successfully');
     }
 
     /**
@@ -58,6 +64,7 @@ class SantriAPIController extends AppBaseController
         // var_dump($input);
         // die;
         $input['id_santri']=Str::uuid();
+        $input['soft_delete']=0;
         $santri = $this->santriRepository->create($input);
 
         return $this->sendResponse($santri->toArray(), 'Santri saved successfully');

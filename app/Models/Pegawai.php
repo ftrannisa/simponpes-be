@@ -28,11 +28,11 @@ class Pegawai extends Model
 
     public $table = 'pegawai';
     
-    const CREATED_AT = 'created_at';
-    const UPDATED_AT = 'updated_at';
+    const CREATED_AT = 'create_date';
+    const UPDATED_AT = 'last_update';
 
     protected $primaryKey = 'id_pegawai';
-
+    protected $appends = ['id'];
 
     public $fillable = [
         'id_pegawai',
@@ -81,16 +81,19 @@ class Pegawai extends Model
         'nama_pegawai' => 'nullable|string|max:100',
         'nama_panggilan' => 'nullable|string|max:20',
         'nik' => 'nullable|integer',
-        'id_bidang' => 'nullable|string|max:30',
+        'id_bidang' => 'nullable|string|max:100',
         'no_hp' => 'nullable',
         'jenis_kelamin' => 'nullable|string|max:10',
         'alamat' => 'nullable|string',
-        'id_peran' => 'nullable|string|max:30',
+        'id_peran' => 'nullable|string|max:100',
         'tanggal_masuk' => 'nullable',
         'create_date' => 'nullable',
         'last_update' => 'nullable',
         'soft_delete' => 'nullable'
     ];
 
-    
+    public function getIdAttribute()
+    {
+        return $this->attributes['id_pegawai'];
+    }
 }

@@ -2,10 +2,10 @@
 
 namespace App\Http\Requests\API;
 
-use App\Models\User;
+use App\Models\OrangTua;
 use InfyOm\Generator\Request\APIRequest;
 
-class UpdateUserAPIRequest extends APIRequest
+class UpdateOrangTuaAPIRequest extends APIRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,7 @@ class UpdateUserAPIRequest extends APIRequest
      */
     public function rules()
     {
-        $rules = User::$rules;
+        $rules = OrangTua::$rules;
         
         return $rules;
     }
