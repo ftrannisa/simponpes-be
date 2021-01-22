@@ -31,7 +31,7 @@ class OrangTua extends Model
 
     public $table = 'orangtua';
     
-    const CREATED_AT = 'created_date';
+    const CREATED_AT = 'create_date';
     const UPDATED_AT = 'last_update';
 
     protected $primaryKey = 'id_orangtua';
@@ -40,18 +40,11 @@ class OrangTua extends Model
 
     public $fillable = [
         'id_orangtua',
-        'nama_ayah',
-        'alamat_ayah',
-        'pekerjaan_ayah',
-        'hp_ayah',
-        'nama_ibu',
-        'alamat_ibu',
-        'pekerjaan_ibu',
-        'hp_ibu',
-        'nama_wali',
-        'alamat_wali',
-        'pekerjaan_wali',
-        'hp_wali',
+        'nama_ortu',
+        'alamat_ortu',
+        'pekerjaan_ortu',
+        'hp_ortu',
+        'tgl_lahir_ortu',
         'create_date',
         'last_update',
         'soft_delete',
@@ -65,18 +58,11 @@ class OrangTua extends Model
      */
     protected $casts = [
         'id_orangtua' => 'string',
-        'nama_ayah' => 'string',
-        'alamat_ayah' => 'string',
-        'pekerjaan_ayah' => 'string',
-        'hp_ayah' => 'string',
-        'nama_ibu' => 'string',
-        'alamat_ibu' => 'string',
-        'pekerjaan_ibu' => 'string',
-        'hp_ibu' => 'string',
-        'nama_wali' => 'string',
-        'alamat_wali' => 'string',
-        'pekerjaan_wali' => 'string',
-        'hp_wali' => 'string',
+        'nama_ortu' => 'string',
+        'alamat_ortu' => 'string',
+        'pekerjaan_ortu' => 'string',
+        'hp_ortu' => 'string',
+        'tgl_lahir_ortu' => 'string',
         'create_date' => 'datetime',
         'last_update' => 'datetime',
         'soft_delete' => 'integer',
@@ -89,18 +75,11 @@ class OrangTua extends Model
      * @var array
      */
     public static $rules = [
-        'nama_ayah' => 'nullable|string|max:255',
-        'alamat_ayah' => 'nullable|string|max:255',
-        'pekerjaan_ayah' => 'nullable|string|max:255',
-        'hp_ayah' => 'nullable|string|max:255',
-        'nama_ibu' => 'nullable|string|max:255',
-        'alamat_ibu' => 'nullable|string|max:255',
-        'pekerjaan_ibu' => 'nullable|string|max:255',
-        'hp_ibu' => 'nullable|string|max:255',
-        'nama_wali' => 'nullable|string|max:255',
-        'alamat_wali' => 'nullable|string|max:255',
-        'pekerjaan_wali' => 'nullable|string|max:255',
-        'hp_wali' => 'nullable|string|max:255',
+        'nama_ortu' => 'nullable|string|max:255',
+        'alamat_ortu' => 'nullable|string|max:255',
+        'pekerjaan_ortu' => 'nullable|string|max:255',
+        'hp_ortu' => 'nullable|string|max:255',
+        'tgl_lahir_ortu' => 'nullable|string|max:255',
         'create_date' => 'nullable',
         'last_update' => 'nullable',
         'soft_delete' => 'nullable',
