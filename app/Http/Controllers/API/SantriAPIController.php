@@ -6,6 +6,7 @@ use App\Http\Requests\API\CreateSantriAPIRequest;
 use App\Http\Requests\API\UpdateSantriAPIRequest;
 use App\Models\Santri;
 use App\Repositories\SantriRepository;
+use App\Repositories\OrangTuaRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
 use Response;
@@ -21,9 +22,10 @@ class SantriAPIController extends AppBaseController
     /** @var  SantriRepository */
     private $santriRepository;
 
-    public function __construct(SantriRepository $santriRepo)
+    public function __construct(SantriRepository $santriRepo, OrangTuaRepository $orangTuaRepo)
     {
         $this->santriRepository = $santriRepo;
+        $this->orangTuaRepository = $orangTuaRepo;
     }
 
     /**
@@ -43,8 +45,17 @@ class SantriAPIController extends AppBaseController
 
         // return $this->sendResponse($santris->toArray(), 'Santris retrieved successfully');
         $santris = DB::table('santri')
-            ->select('santri.id_santri as id', 'santri.*')
-            ->where('soft_delete', 0)
+            ->select('santri.id_santri as id', 'santri.*', 'orangtua.nama_ortu',
+            'orangtua.alamat_ortu',
+            'orangtua.pekerjaan_ortu',
+            'orangtua.hp_ortu',
+            // 'orangtua.create_date',
+            // 'orangtua.last_update',
+            // 'orangtua.soft_delete',
+            'orangtua.nik',
+            'orangtua.tgl_lahir_ortu')
+            ->leftJoin('orangtua as orangtua', 'santri.id_orangtua', '=', 'orangtua.id_orangtua')
+            ->where('santri.soft_delete', 0)
             ->get();
 
         return $this->sendResponse($santris->toArray(), 'Santri retrieved successfully');
@@ -59,13 +70,26 @@ class SantriAPIController extends AppBaseController
      * @return Response
      */
     public function store(CreateSantriAPIRequest $request)
-    {
+    {   
         $input = $request->all();
         // var_dump($input);
         // die;
         $input['id_santri']=Str::uuid();
         $input['soft_delete']=0;
         $santri = $this->santriRepository->create($input);
+
+        $input = $request->all('nama_ortu',
+        'alamat_ortu',
+        'pekerjaan_ortu',
+        'hp_ortu',
+        'create_date',
+        'last_update',
+        'soft_delete',
+        'nik',
+        'tgl_lahir_ortu');
+        $input['id_orangtua']=Str::uuid();
+        $input['soft_delete']=0;
+        $orangTua = $this->OrangTuaRepository->create($input);
 
         return $this->sendResponse($santri->toArray(), 'Santri saved successfully');
     }
@@ -103,6 +127,28 @@ class SantriAPIController extends AppBaseController
     {
         $input = $request->all();
 
+        $ortu = $request->all('nama_ortu',
+        'alamat_ortu',
+        'pekerjaan_ortu',
+        'hp_ortu',
+        'create_date',
+        'last_update',
+        'soft_delete',
+        'nik',
+        'tgl_lahir_ortu');
+
+        $ortu2 = DB::table('santri')->where('id_santri', $id)->first();
+        
+        if ($ortu2->id_orangtua != null) {
+            $ortu2 = $this->orangTuaRepository->update($ortu, $ortu2->id_orangtua);
+        } else {
+            $uuid=Str::uuid();
+            $ortu['id_orangtua']=$uuid;
+            $input['id_orangtua']=$uuid;
+            $ortu['soft_delete']=0;
+            $orangTua = $this->orangTuaRepository->create($ortu);
+        }
+
         /** @var Santri $santri */
         $santri = $this->santriRepository->find($id);
 
@@ -111,6 +157,8 @@ class SantriAPIController extends AppBaseController
         }
 
         $santri = $this->santriRepository->update($input, $id);
+
+ 
 
         return $this->sendResponse($santri->toArray(), 'Santri updated successfully');
     }
