@@ -137,4 +137,14 @@ class OrangTuaAPIController extends AppBaseController
 
         return $this->sendSuccess('Orang Tua deleted successfully');
     }
+
+    public function getNik(Request $request) 
+    {
+        $peran = DB::table('orangtua')
+        ->select('orangtua.nik as nik', 'orangtua.*')
+        ->where('nik', $request->nik)
+        ->first();
+
+        return $peran;
+    }
 }

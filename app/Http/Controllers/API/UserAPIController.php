@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
 use Response;
 use Illuminate\Support\Str;
+use DB;
 
 /**
  * Class UserController
@@ -35,11 +36,17 @@ class UserAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $users = $this->userRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
-        );
+        // $users = $this->userRepository->all(
+        //     $request->except(['skip', 'limit']),
+        //     $request->get('skip'),
+        //     $request->get('limit')
+        // );
+
+        $users = DB::table('pengguna')
+            ->select('pengguna.id_user as id', 'pengguna.id_user', 'pengguna.email', 'pengguna.nama', 'pengguna.create_date', 'pengguna.last_update', 'pengguna.soft_delete', 'pengguna.id_peran', 'pengguna.id_pegawai', 'peran.nama_peran as nama_peran')
+            ->where('pengguna.soft_delete', 0)
+            ->leftJoin('ref.peran as peran', 'pengguna.id_peran', '=', 'peran.id_peran')
+            ->get();
 
         return $this->sendResponse($users->toArray(), 'Users retrieved successfully');
     }
@@ -55,7 +62,7 @@ class UserAPIController extends AppBaseController
     public function store(CreateUserAPIRequest $request)
     {
         $input = $request->all();
-
+        $input['password'] = md5($request->password);
         $user = $this->userRepository->create($input);
 
         return $this->sendResponse($user->toArray(), 'User saved successfully');
@@ -128,5 +135,21 @@ class UserAPIController extends AppBaseController
         $user->delete();
 
         return $this->sendSuccess('User deleted successfully');
+    }
+
+    public function getRefBidang()
+    {
+        $bidang = DB::table('ref.bidang')
+        ->get();
+
+        return $bidang;
+    }
+
+    public function getRefPeran()
+    {
+        $peran = DB::table('ref.peran')
+        ->get();
+
+        return $peran;
     }
 }

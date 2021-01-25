@@ -50,3 +50,7 @@ Route::get('getRefJenisToko', 'API\UnitUsahaAPIController@getRefJenisToko');
 Route::get('getRefBidang', 'API\PegawaiAPIController@getRefBidang');
 
 Route::get('getRefPeran', 'API\PegawaiAPIController@getRefPeran');
+
+Route::get('getNik', 'API\OrangTuaAPIController@getNik');
+
+Route::resource('profile_ponpes', 'API\ProfilePonpesAPIController');

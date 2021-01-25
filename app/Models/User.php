@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Model as Model;
  * @property string $email
  * @property string $password
  * @property string $nama
- * @property string|\Carbon\Carbon $create_data
+ * @property string|\Carbon\Carbon $create_date
  * @property string|\Carbon\Carbon $last_update
  * @property integer $soft_delete
  * @property integer $id_peran
@@ -24,12 +24,14 @@ class User extends Model
 
     public $table = 'pengguna';
     
-    const CREATED_AT = 'created_at';
-    const UPDATED_AT = 'updated_at';
+    const CREATED_AT = 'created_date';
+    const UPDATED_AT = 'last_update';
 
     protected $primaryKey = 'id_user';
+    protected $appends = ['id'];
 
     public $fillable = [
+        'id_user',
         'email',
         'password',
         'nama',
@@ -73,6 +75,11 @@ class User extends Model
         'id_pegawai' => 'nullable|string'
     ];
 
+    public function getIdAttribute()
+    {
+        return $this->attributes['id_user'];
+    }
+
     // /**
     //  * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
     //  **/
@@ -80,4 +87,5 @@ class User extends Model
     // {
     //     return $this->belongsToMany(\App\Models\Ref.jenisToko::class, 'toko');
     // }
+    
 }
