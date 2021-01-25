@@ -21,6 +21,7 @@ class Cors
             'http://localhost:8000',
             'http://104.248.159.10:81',
             'http://localhost',
+	    'http://104.248.159.10:81',
             null
         ];
         
