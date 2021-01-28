@@ -62,6 +62,8 @@ class UserAPIController extends AppBaseController
     public function store(CreateUserAPIRequest $request)
     {
         $input = $request->all();
+        $input['id_user']=Str::uuid();
+        $input['soft_delete']=0;
         $input['password'] = md5($request->password);
         $user = $this->userRepository->create($input);
 

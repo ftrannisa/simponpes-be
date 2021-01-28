@@ -142,9 +142,9 @@ class OrangTuaAPIController extends AppBaseController
     {
         $peran = DB::table('orangtua')
         ->select('orangtua.nik as nik', 'orangtua.*')
-        ->where('nik', $request->nik)
+        ->where('nik', 'like', "%$request->nik%")
         ->first();
 
-        return $peran;
+        return $this->sendResponse($peran, 'orangtua retrieved successfully');
     }
 }

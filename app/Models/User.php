@@ -24,7 +24,7 @@ class User extends Model
 
     public $table = 'pengguna';
     
-    const CREATED_AT = 'created_date';
+    const CREATED_AT = 'create_date';
     const UPDATED_AT = 'last_update';
 
     protected $primaryKey = 'id_user';
@@ -55,7 +55,7 @@ class User extends Model
         'create_data' => 'datetime',
         'last_update' => 'datetime',
         'soft_delete' => 'integer',
-        'id_peran' => 'integer',
+        'id_peran' => 'string',
         'id_pegawai' => 'string'
     ];
 
@@ -71,7 +71,7 @@ class User extends Model
         'create_data' => 'nullable',
         'last_update' => 'nullable',
         'soft_delete' => 'nullable',
-        'id_peran' => 'nullable|integer',
+        'id_peran' => 'nullable|string',
         'id_pegawai' => 'nullable|string'
     ];
 
